@@ -1,0 +1,143 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://specs.agentic-operation.dev/spec-445/agent-card.schema.json",
+  "title": "Spec-445 AI Agent Card (additive over A2A Agent Card v1.0)",
+  "type": "object",
+  "required": ["id", "name", "description", "version", "uuid", "url", "provider", "classification", "capabilities", "authentication", "defaultInputModes", "defaultOutputModes", "skills", "impactRadius", "deploymentStatus", "lastUpdated", "spec443_profile_ref"],
+  "properties": {
+    "id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9-_]*$"},
+    "name": {"type": "string", "minLength": 1, "maxLength": 256},
+    "description": {"type": "string", "minLength": 1, "maxLength": 1024},
+    "version": {"type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(-[a-z0-9.]+)?$"},
+    "uuid": {"type": "string", "format": "uuid"},
+    "url": {"type": "string", "pattern": "^https://"},
+    "content_identifier_cid": {"type": "string", "pattern": "^sha256:[a-f0-9]{64}$"},
+    "integrity_wrapper": {
+      "type": "object",
+      "required": ["signature_type", "issuer", "transparency_log"],
+      "properties": {
+        "signature_type": {"type": "string"},
+        "issuer": {"type": "string", "pattern": "^https://"},
+        "transparency_log": {"type": "string", "pattern": "^https://"}
+      }
+    },
+    "documentationUrl": {"type": "string", "pattern": "^https://"},
+    "iconUrl": {"type": "string", "pattern": "^https://"},
+    "provider": {
+      "type": "object",
+      "required": ["organization", "url", "contactEmail"],
+      "properties": {
+        "organization": {"type": "string", "minLength": 1, "maxLength": 256},
+        "url": {"type": "string", "pattern": "^https://"},
+        "contactEmail": {"type": "string", "format": "email"},
+        "tmForumMemberId": {"type": "string"},
+        "signingAuthority": {"type": "string", "pattern": "^https://"}
+      }
+    },
+    "classification": {
+      "type": "object",
+      "required": ["autonomy_level", "agency_class", "automation_role", "oda_relationship"],
+      "properties": {
+        "autonomy_level": {"enum": ["L1", "L2", "L3", "L4", "L5"]},
+        "agency_class": {"enum": ["Agentic AI", "Non-Agentic AI"]},
+        "intelligence_class": {"enum": ["Simple Reflex", "Model-Based Reflex", "Goal-Based", "Utility-Based", "Learning", "Utility-Based Learning"]},
+        "automation_role": {"enum": ["Worker Agent", "Planner Agent", "Orchestrator Agent"]},
+        "mobility": {"enum": ["Static", "Single-Environment", "Cross-Environment"]},
+        "oda_relationship": {"enum": ["Standalone", "Agentified ODA Component", "ODA-Adjacent"]}
+      }
+    },
+    "capabilities": {
+      "type": "object",
+      "required": ["streaming", "pushNotifications"],
+      "properties": {
+        "streaming": {"type": "boolean"},
+        "pushNotifications": {"type": "boolean"},
+        "stateTransitionHistory": {"type": "boolean"}
+      }
+    },
+    "coordination": {
+      "type": "object",
+      "properties": {
+        "coordinationProtocol": {"enum": ["a2a_jsonrpc", "rep", "mcp", "wo_a", "custom"]},
+        "coordinationVariables": {"type": "array", "items": {"type": "string"}},
+        "topology_ref": {"type": "string", "description": "[EXT] pointer to the Spec-443 §6.4 topology block"}
+      }
+    },
+    "extensions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["uri"],
+        "properties": {
+          "uri": {"type": "string", "pattern": "^https://github.com/tmforum-agents/extensions/[a-z-]+/v[0-9]+$"},
+          "required": {"type": "boolean"},
+          "params": {"type": "object"}
+        }
+      }
+    },
+    "defaultInputModes": {"type": "array", "items": {"type": "string"}, "minItems": 1},
+    "defaultOutputModes": {"type": "array", "items": {"type": "string"}, "minItems": 1},
+    "defaultDataContracts": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["format", "schemaRef"],
+        "properties": {
+          "format": {"enum": ["tmforum-sid", "openapi", "json-schema", "custom"]},
+          "schemaRef": {"type": "string"},
+          "entities": {"type": "array", "items": {"type": "string"}},
+          "tmForumApiRef": {"type": "string"},
+          "role": {"enum": ["input", "output", "both"]}
+        }
+      }
+    },
+    "authentication": {
+      "type": "object",
+      "required": ["schemes", "credentials"],
+      "properties": {
+        "schemes": {"type": "array", "items": {"enum": ["oauth2_oidc", "mtls", "api_key", "bearer", "basic", "custom"]}, "minItems": 1},
+        "credentials": {"enum": ["header", "query", "cookie", "mtls_cert"]},
+        "scopesRequired": {"type": "array", "items": {"type": "string"}},
+        "tokenValidation": {"enum": ["jwks_uri", "introspection", "static_jwk"]},
+        "issuer": {"type": "string", "pattern": "^https://"},
+        "audience": {"type": "string"}
+      }
+    },
+    "deonticConstraints": {
+      "type": "object",
+      "properties": {
+        "embargoes": {"type": "array", "items": {"type": "string"}},
+        "burdens": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "impactRadius": {"enum": ["low", "medium", "high"]},
+    "skills": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "description", "source_taxonomy", "bound_core_task"],
+        "properties": {
+          "id": {"type": "string", "pattern": "^(TMF-OASF [0-9]+|TMF-GB1033 F-[0-9]+|EXTENSION-[A-Za-z0-9-]+)$"},
+          "name": {"type": "string", "minLength": 1, "maxLength": 256},
+          "description": {"type": "string", "minLength": 1, "maxLength": 1024},
+          "tags": {"type": "array", "items": {"type": "string"}},
+          "examples": {"type": "array", "items": {"type": "string"}},
+          "source_taxonomy": {"enum": ["OASF Skill Taxonomy", "GB1033 Functional Framework", "TM Forum Custom"]},
+          "bound_core_task": {"type": "string"},
+          "bound_business_capability": {"type": "string"},
+          "etom_process_ref": {"type": "string"}
+        }
+      }
+    },
+    "spec443_profile_ref": {"type": "string"},
+    "spec444_bootstrap_ref": {"type": "string"},
+    "companionArtifacts": {"type": "array", "items": {"type": "object", "required": ["role", "ref"], "properties": {"role": {"type": "string"}, "ref": {"type": "string"}}}},
+    "deploymentStatus": {"enum": ["draft", "in_review", "approved", "deprecated"]},
+    "lastUpdated": {"type": "string", "format": "date-time"},
+    "maintenancePlan": {"type": "string"},
+    "documentation": {"type": "array", "items": {"type": "object", "required": ["role", "url"], "properties": {"role": {"type": "string"}, "url": {"type": "string", "pattern": "^https://"}}}},
+    "autonomyCaseRef": {"type": "string", "pattern": "^https://"}
+  }
+}

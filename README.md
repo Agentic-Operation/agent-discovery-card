@@ -8,7 +8,7 @@ Spec-445 extensions over TM Forum **TMF445 v1.0.0** (alpha; delta in `spec/annex
 `environment-instances` (per-environment instance registration), `modelGovernance` (bound model
 id/version/CID/risk class), topology reference in `coordination`, and a single canonical skillDiscovery URI.
 
-- **Status:** Draft (Phase 0 — communication package). **License:** Apache-2.0
+- **Status:** Draft — Phase 0 comms pack pending; **Phase 1**: normative `spec/SPEC-445.md` v1.0.0-alpha on `vibe/spec-draft-5a1ad6`. **License:** Apache-2.0
 
 ## The triad (sibling repos)
 

@@ -11,3 +11,15 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Versions follo
   architecture diagrams (mermaid).
 - Repo scaffolding: `docs/`, `spec/`, `schemas/`, `examples/`, `conformance-kit/`, `api/`, `tools/`,
   `integrations/`, `user-tools/`, `tests/`, GitHub templates and docs-lint workflow, pre-commit config.
+
+### Added (Phase 1)
+
+- `spec/SPEC-445.md` normative draft v1.0.0-alpha (additive over A2A v1.0) with [EXT]:
+  canonical skillDiscovery URI, `coordination.topology_ref`, `environment-instances` extension (E1),
+  `modelGovernance` extension (E2); annexes: delta-vs-TMF445, cross-check-manifest, self-check.
+- `schemas/agent-card.schema.json` (normative); worked example `examples/loyalty-agent/card.json`
+  incl. environment instances + model governance.
+- `conformance-kit/`: `card_validate.py`, `crosscheck.py`, pytest suite, CI gate; active
+  `.github/workflows/ci-gate.yml`.
+- `api/openapi/registry-api.yaml` (Agent Card Registry API: cards CRUD/search, verify, environments,
+  WoA well-known).
