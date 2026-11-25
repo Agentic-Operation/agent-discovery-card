@@ -23,3 +23,11 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Versions follo
   `.github/workflows/ci-gate.yml`.
 - `api/openapi/registry-api.yaml` (Agent Card Registry API: cards CRUD/search, verify, environments,
   WoA well-known).
+
+### Added (Phase 2)
+
+- `integrations/registry/registry.py`: reference Agent Card Registry implementing
+  `api/openapi/registry-api.yaml` (register/search/versions/verify/environments/WoA well-known).
+- `tools/cli/spec445.py`: validate / register / verify / search / environments CLI.
+- `conformance-kit/runtime-check/verify_integrity.py`: stage-3 startup integrity check.
+- CI: `cross-triad` job now runs `crosscheck.py` across the three sibling repos' worked examples.
