@@ -31,3 +31,10 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Versions follo
 - `tools/cli/spec445.py`: validate / register / verify / search / environments CLI.
 - `conformance-kit/runtime-check/verify_integrity.py`: stage-3 startup integrity check.
 - CI: `cross-triad` job now runs `crosscheck.py` across the three sibling repos' worked examples.
+
+### Changed (Phase 2 reshape)
+
+- `integrations/registry/` moved to **Agent-Registry** repo (API contract stays canonical here in
+  `api/openapi/registry-api.yaml`); `spec445` CLI now targets the registry service.
+- Comms pack moved to **agent-standard-docs**; `docs/communication/` is now a pointer.
+- `cross-triad` CI job uses **agent-conformance** validators; README/REFERENCES link all service repos.
