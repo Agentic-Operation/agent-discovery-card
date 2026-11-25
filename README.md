@@ -1,4 +1,4 @@
-# agent-discovery-card — Spec-445: AI Agent Card
+# Agent Discovery Card (Spec-445): The AI Agent Card
 
 **Spec-445** is the *source/discover* contract of the agent triad: a machine-readable JSON **Agent Card**,
 additive over the **A2A Agent Card v1.0** (every A2A-compliant card is a valid Spec-445 card), used for
