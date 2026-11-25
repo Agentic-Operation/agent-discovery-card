@@ -8,7 +8,7 @@ Spec-445 extensions over TM Forum **TMF445 v1.0.0** (alpha; delta in `spec/annex
 `environment-instances` (per-environment instance registration), `modelGovernance` (bound model
 id/version/CID/risk class), topology reference in `coordination`, and a single canonical skillDiscovery URI.
 
-- **Status:** Draft — Phase 0 comms pack pending; **Phase 1**: normative `spec/SPEC-445.md` v1.0.0-alpha on `vibe/spec-draft-5a1ad6`. **License:** Apache-2.0
+- **Status:** Draft — `spec/SPEC-445.md` v1.0.0-alpha merged on `main` (PRs #1–#3); comms pack canonical in [agent-standard-docs](https://github.com/Agentic-Operation/agent-standard-docs). **License:** Apache-2.0
 
 ## The triad (sibling repos)
 
@@ -20,7 +20,7 @@ id/version/CID/risk class), topology reference in `coordination`, and a single c
 
 Join keys across the triad: identity fields (`id`, `uuid`, `version`, `provider`, CID, `integrity_wrapper`),
 `skills[].id` string equality (`TMF-OASF <n>` / `TMF-GB1033 F-xxxx`), bidirectional companion pointers —
-see [docs/communication/00-triad-overview.md](docs/communication/00-triad-overview.md).
+see the [triad overview](https://github.com/Agentic-Operation/agent-standard-docs/blob/main/communication/00-triad-overview.md) in agent-standard-docs.
 
 ## Repository map
 
@@ -34,13 +34,13 @@ see [docs/communication/00-triad-overview.md](docs/communication/00-triad-overvi
 | `tools/cli/` | `spec445 validate/register/verify` CLI |
 | `integrations/` | WoA/HAIDIP discovery, A2A JSON-RPC handler, registry backend, Sigstore verify |
 | `user-tools/` | Client SDKs (python/ts), card examples, Postman collection |
-| `docs/communication/` | Audience one-pagers (source one-pager here; canonical triad pack in agent-profile-management) |
+| `docs/communication/` | Pointer to the canonical comms pack in [agent-standard-docs](https://github.com/Agentic-Operation/agent-standard-docs) |
 | `docs/guides/` `docs/architecture/` `docs/references/` | Quickstarts, diagrams, related sources |
 
 ## Quickstart
 
-See [docs/guides/quickstart-publish-a-card.md](docs/guides/quickstart-publish-a-card.md) and
-[docs/communication/03-source-and-discover.md](docs/communication/03-source-and-discover.md).
+See [docs/guides/quickstart-publish-a-card.md](docs/guides/quickstart-publish-a-card.md) and the
+[03-source-and-discover](https://github.com/Agentic-Operation/agent-standard-docs/blob/main/communication/03-source-and-discover.md) one-pager in agent-standard-docs.
 
 ## Contributing
 
