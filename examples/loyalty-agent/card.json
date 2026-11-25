@@ -1,0 +1,278 @@
+{
+  "id": "loyalty-management-agent-v1-card",
+  "name": "Loyalty Management Agent",
+  "description": "A Consultant-level (L3) Agentic AI that operates as a predictive relationship manager for loyalty-program members.",
+  "version": "1.0.0-stable",
+  "uuid": "9e3b2f5d-4a8c-4f6e-8b1d-7c9a2e5f3b6d",
+  "url": "https://agents.example.com",
+  "provider": {
+    "organization": "AI4X Contact Center Project Team",
+    "url": "https://example.com",
+    "contactEmail": "agent-support@example.com",
+    "signingAuthority": "https://github.com/login/oauth"
+  },
+  "content_identifier_cid": "sha256:4444444444444444444444444444444444444444444444444444444444444444",
+  "integrity_wrapper": {
+    "signature_type": "Sigstore-OIDC",
+    "issuer": "https://github.com/login/oauth",
+    "transparency_log": "https://rekor.sigstore.dev"
+  },
+  "documentationUrl": "https://example.com/docs/loyalty-management-agent",
+  "classification": {
+    "autonomy_level": "L3",
+    "agency_class": "Agentic AI",
+    "intelligence_class": "Utility-Based Learning",
+    "automation_role": "Worker Agent",
+    "mobility": "Cross-Environment",
+    "oda_relationship": "ODA-Adjacent"
+  },
+  "capabilities": {
+    "streaming": true,
+    "pushNotifications": true,
+    "stateTransitionHistory": true
+  },
+  "coordination": {
+    "coordinationProtocol": "a2a_jsonrpc",
+    "coordinationVariables": [
+      "DAILY_REDEMPTION_BUDGET",
+      "MEMBER_CONSENT_FLAG"
+    ],
+    "topology_ref": "https://github.com/Agentic-Operation/agent-profile-management/blob/main/examples/loyalty-agent/profile.json"
+  },
+  "extensions": [
+    {
+      "uri": "https://github.com/tmforum-agents/extensions/skill-discovery/v1",
+      "required": false,
+      "params": {
+        "skillDiscovery": true,
+        "discoveryEndpoint": "https://agents.example.com/skills",
+        "discoveryProtocol": "Spec-443 \u00a74.2"
+      }
+    },
+    {
+      "uri": "https://github.com/tmforum-agents/extensions/environment-instances/v1",
+      "required": false,
+      "params": {
+        "environments": [
+          {
+            "environment": "dev",
+            "instance_id": "lma-dev-5c1a2b",
+            "deploymentStatus": "approved",
+            "deployed_version": "1.0.0-stable",
+            "artifact_cid": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+            "card_cid": "sha256:4444444444444444444444444444444444444444444444444444444444444444",
+            "url": "https://agents-dev.example.com",
+            "health": "healthy",
+            "last_check": "2026-11-25T00:00:00Z",
+            "rollout_state": "active",
+            "autonomyCaseRef": "https://grc.example.com/autonomy-cases/loyalty-management-agent-v1/dev"
+          },
+          {
+            "environment": "stage",
+            "instance_id": "lma-stage-2b8e41",
+            "deploymentStatus": "approved",
+            "deployed_version": "1.0.0-stable",
+            "artifact_cid": "sha256:6666666666666666666666666666666666666666666666666666666666666666",
+            "card_cid": "sha256:4444444444444444444444444444444444444444444444444444444444444444",
+            "url": "https://agents-stage.example.com",
+            "health": "healthy",
+            "last_check": "2026-11-25T00:00:00Z",
+            "rollout_state": "active",
+            "autonomyCaseRef": "https://grc.example.com/autonomy-cases/loyalty-management-agent-v1/stage"
+          },
+          {
+            "environment": "prod",
+            "instance_id": "lma-prod-7f3c9d",
+            "deploymentStatus": "approved",
+            "deployed_version": "1.0.0-stable",
+            "artifact_cid": "sha256:5555555555555555555555555555555555555555555555555555555555555555",
+            "card_cid": "sha256:4444444444444444444444444444444444444444444444444444444444444444",
+            "url": "https://agents.example.com",
+            "health": "healthy",
+            "last_check": "2026-11-25T00:00:00Z",
+            "rollout_state": "canary",
+            "autonomyCaseRef": "https://grc.example.com/autonomy-cases/loyalty-management-agent-v1/prod"
+          }
+        ]
+      }
+    },
+    {
+      "uri": "https://github.com/tmforum-agents/extensions/model-governance/v1",
+      "required": false,
+      "params": {
+        "models": [
+          {
+            "model_id": "churn-scorer",
+            "version": "2.3.1",
+            "cid": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+            "risk_class": "medium",
+            "authority_endpoint": "https://models.example.com/v1/models"
+          },
+          {
+            "model_id": "offer-selector",
+            "version": "1.4.2",
+            "cid": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+            "risk_class": "low",
+            "authority_endpoint": "https://models.example.com/v1/models"
+          }
+        ]
+      }
+    }
+  ],
+  "defaultInputModes": [
+    "text/plain",
+    "application/json"
+  ],
+  "defaultOutputModes": [
+    "application/json",
+    "text/html"
+  ],
+  "defaultDataContracts": [
+    {
+      "format": "openapi",
+      "schemaRef": "https://api.example.com/specs/tmf629-customer-v4.yaml",
+      "tmForumApiRef": "TMF629 v4 \u00a75.2",
+      "role": "input"
+    },
+    {
+      "format": "openapi",
+      "schemaRef": "https://api.example.com/specs/tmf678-campaign-v4.yaml",
+      "tmForumApiRef": "TMF678 v4 \u00a74.1",
+      "role": "output"
+    },
+    {
+      "format": "tmforum-sid",
+      "schemaRef": "CustomerAccount",
+      "entities": [
+        "Customer",
+        "CustomerAccount"
+      ],
+      "role": "both"
+    }
+  ],
+  "authentication": {
+    "schemes": [
+      "oauth2_oidc"
+    ],
+    "credentials": "header",
+    "scopesRequired": [
+      "agent:execute",
+      "pos:write",
+      "ads:write",
+      "crm:read"
+    ],
+    "tokenValidation": "jwks_uri",
+    "issuer": "https://auth.example.com/realms/agents",
+    "audience": "loyalty-management-agent"
+  },
+  "deonticConstraints": {
+    "embargoes": [
+      "auto_finalize_payment(ALL_AI)",
+      "auto_issue_high_tier_upgrade(loyalty_agent)",
+      "auto_share_pii_with_external_brand_partner(loyalty_agent)"
+    ],
+    "burdens": [
+      "provide_attribution_explanation(loyalty_agent)",
+      "log_all_tier_change_evaluations(loyalty_agent)",
+      "surface_low_confidence_indicator(loyalty_agent)"
+    ]
+  },
+  "impactRadius": "medium",
+  "spec443_profile_ref": "https://github.com/Agentic-Operation/agent-profile-management/blob/main/examples/loyalty-agent/profile.json",
+  "spec444_bootstrap_ref": "https://github.com/Agentic-Operation/agent-bootstrap-management/blob/main/examples/loyalty-agent/bootstrap.yaml",
+  "deploymentStatus": "approved",
+  "lastUpdated": "2026-11-25T00:00:00Z",
+  "maintenancePlan": "Monthly model-drift assessment (rolling-30-day AUC and Brier score); quarterly autonomy-certificate renewal; annual security review.",
+  "autonomyCaseRef": "https://grc.example.com/autonomy-cases/loyalty-management-agent-v1",
+  "skills": [
+    {
+      "id": "TMF-OASF 3015",
+      "name": "loyalty.lifecycle.enrolment",
+      "description": "Progressive enrolment with consent capture",
+      "tags": [
+        "loyalty",
+        "enrolment",
+        "consent"
+      ],
+      "source_taxonomy": "OASF Skill Taxonomy",
+      "bound_core_task": "Member lifecycle orchestration",
+      "bound_business_capability": "Customer Data Management",
+      "etom_process_ref": "1.1.1.2 Become Customer"
+    },
+    {
+      "id": "TMF-OASF 3016",
+      "name": "loyalty.lifecycle.tier_progression",
+      "description": "Tier-up evaluation and progression tracking",
+      "tags": [
+        "loyalty",
+        "tier"
+      ],
+      "source_taxonomy": "OASF Skill Taxonomy",
+      "bound_core_task": "Member lifecycle orchestration",
+      "etom_process_ref": "1.1.3.1 Manage Customer Account"
+    },
+    {
+      "id": "TMF-GB1033 F-1842",
+      "name": "redemption.multi_currency.validate",
+      "description": "Real-time validation of mixed points + cash redemptions",
+      "tags": [
+        "loyalty",
+        "redemption"
+      ],
+      "source_taxonomy": "GB1033 Functional Framework",
+      "bound_core_task": "Real-time redemption validation",
+      "etom_process_ref": "1.4.2.1 Issue Bill"
+    },
+    {
+      "id": "TMF-OASF 3020",
+      "name": "loyalty.tier.grace_period",
+      "description": "Auto-extension of grace periods based on hardship detection",
+      "tags": [
+        "loyalty",
+        "tier",
+        "hardship"
+      ],
+      "source_taxonomy": "OASF Skill Taxonomy",
+      "bound_core_task": "Tier management and status optimization"
+    },
+    {
+      "id": "TMF-OASF 3021",
+      "name": "loyalty.tier.fast_track",
+      "description": "Spend-threshold style challenges",
+      "tags": [
+        "loyalty",
+        "tier",
+        "challenge"
+      ],
+      "source_taxonomy": "OASF Skill Taxonomy",
+      "bound_core_task": "Tier management and status optimization"
+    },
+    {
+      "id": "TMF-OASF 2046",
+      "name": "analytics.predictive.churn_scoring",
+      "description": "Predictive churn scoring using behavioural decay",
+      "tags": [
+        "loyalty",
+        "churn",
+        "ml"
+      ],
+      "source_taxonomy": "OASF Skill Taxonomy",
+      "bound_core_task": "Churn risk intervention",
+      "bound_business_capability": "Customer Retention Management",
+      "etom_process_ref": "1.3.1.1 Analyze Customer"
+    },
+    {
+      "id": "TMF-OASF 2051",
+      "name": "campaign.winback.offer_selection",
+      "description": "Win-back offer selection calibrated to historical value",
+      "tags": [
+        "loyalty",
+        "winback",
+        "campaign"
+      ],
+      "source_taxonomy": "OASF Skill Taxonomy",
+      "bound_core_task": "Churn risk intervention",
+      "etom_process_ref": "1.3.1.2 Manage Campaign"
+    }
+  ]
+}
