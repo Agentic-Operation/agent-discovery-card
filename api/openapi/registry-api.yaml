@@ -1,0 +1,78 @@
+openapi: 3.1.0
+info:
+  title: Agent Card Registry API (Spec-445)
+  version: 0.1.0
+  description: Register, search, resolve, and verify Spec-445 agent cards; Web-of-Agents discovery at
+    /.well-known/woa.json; per-environment instance registration via the environment-instances extension.
+servers:
+  - url: https://registry.agentic-operation.dev/v1
+paths:
+  /cards:
+    post:
+      summary: Register a card (schema + cross-check validation; 201 on accept, 422 with violations)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: {$ref: '../../schemas/agent-card.schema.json'}
+      responses: {'201': {description: Registered}, '422': {description: Violations}}
+    get:
+      summary: Search cards by skill id, taxonomy, autonomy level, impact radius, provider, status
+      parameters:
+        - {name: skill_id, in: query, schema: {type: string}}
+        - {name: source_taxonomy, in: query, schema: {type: string}}
+        - {name: autonomy_level, in: query, schema: {type: string, enum: [L1, L2, L3, L4, L5]}}
+        - {name: impactRadius, in: query, schema: {type: string, enum: [low, medium, high]}}
+        - {name: provider, in: query, schema: {type: string}}
+        - {name: deploymentStatus, in: query, schema: {type: string}}
+      responses: {'200': {description: Card list}}
+  /cards/{id}:
+    get:
+      summary: Get latest card by id
+      parameters: [{name: id, in: path, required: true, schema: {type: string}}]
+      responses: {'200': {description: Card}, '404': {description: Not found}}
+  /cards/{id}/versions/{version}:
+    get:
+      summary: Get a specific card version
+      parameters:
+        - {name: id, in: path, required: true, schema: {type: string}}
+        - {name: version, in: path, required: true, schema: {type: string}}
+      responses: {'200': {description: Card version}}
+  /cards/{id}/verify:
+    post:
+      summary: Verify integrity_wrapper signature against the transparency log + CID
+      parameters: [{name: id, in: path, required: true, schema: {type: string}}]
+      responses: {'200': {description: 'Verification result'}, '422': {description: Verification failed}}
+  /cards/{id}/environments:
+    get:
+      summary: Per-environment instances (environment-instances extension) — which version is live where
+      parameters: [{name: id, in: path, required: true, schema: {type: string}}]
+      responses: {'200': {description: Environment instance list}}
+  /cards/{id}/environments/{environment}:
+    put:
+      summary: Register/update an environment instance (called by the Spec-444 rollout controller)
+      parameters:
+        - {name: id, in: path, required: true, schema: {type: string}}
+        - {name: environment, in: path, required: true, schema: {type: string}}
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [instance_id, deployed_version, artifact_cid, health, rollout_state]
+              properties:
+                instance_id: {type: string}
+                deployed_version: {type: string}
+                artifact_cid: {type: string, pattern: '^sha256:[a-f0-9]{64}$'}
+                card_cid: {type: string, pattern: '^sha256:[a-f0-9]{64}$'}
+                url: {type: string, pattern: '^https://'}
+                health: {enum: [healthy, degraded, unhealthy]}
+                rollout_state: {enum: [active, canary, draining, rolled-back]}
+                autonomyCaseRef: {type: string, pattern: '^https://'}
+      responses: {'200': {description: Updated}, '422': {description: Invalid instance}}
+  /.well-known/woa.json:
+    get:
+      summary: Web-of-Agents discovery endpoint (media type application/woa+json)
+      parameters: [{name: agent, in: query, schema: {type: string}}]
+      responses: {'200': {description: Card or card index}}
